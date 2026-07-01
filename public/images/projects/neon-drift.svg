@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a0a"/>
+      <stop offset="1" stop-color="#141414"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#bg)"/>
+  <g stroke="#ec4899" stroke-opacity="0.5" stroke-width="2" fill="none">
+    <path d="M100 500 L 300 300 L 500 500 L 700 250 L 900 480 L 1100 320"/>
+  </g>
+  <g font-family="Geist, system-ui, sans-serif" fill="#ffffff">
+    <text x="80" y="360" font-size="80" font-weight="700">Neon Drift</text>
+    <text x="82" y="420" font-size="28" fill="#a3a3a3">赛博朋克跑酷</text>
+  </g>
+</svg>

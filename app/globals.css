@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+    --border: 0 0% 90%;
+    --ring: 0 0% 9%;
+    --accent: 0 0% 9%;
+    --accent-foreground: 0 0% 100%;
+    --radius: 0.75rem;
+    --grain-opacity: 0.04;
+  }
+
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 64%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 98%;
+    --border: 0 0% 16%;
+    --ring: 0 0% 98%;
+    --accent: 0 0% 98%;
+    --accent-foreground: 0 0% 4%;
+    --grain-opacity: 0.06;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
+  }
+
+  ::selection {
+    @apply bg-foreground text-background;
+  }
+
+  /* 自定义滚动条 */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-border;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/40;
+  }
+}
+
+@layer components {
+  .container-px {
+    @apply px-6 md:px-8 lg:px-12;
+  }
+
+  .section-py {
+    @apply py-20 md:py-28 lg:py-32;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* 颗粒噪点纹理 */
+  .grain::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' /%3E%3C/svg%3E");
+  }
+
+  /* 骨架屏 shimmer */
+  .skeleton {
+    @apply relative overflow-hidden bg-muted;
+  }
+  .skeleton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--foreground) / 0.06),
+      transparent
+    );
+    animation: shimmer 2s infinite;
+  }
+
+  /* 渐变文字 */
+  .text-gradient {
+    @apply bg-gradient-to-br from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent;
+  }
+}
+
+@layer utilities {
+  .mask-fade-b {
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  }
+  .mask-fade-r {
+    mask-image: linear-gradient(to right, black 80%, transparent 100%);
+  }
+}
+
+/* 代码块样式（rehype-pretty-code） */
+[data-rehype-pretty-code-figure] {
+  @apply relative my-6 overflow-hidden rounded-xl border border-border bg-card;
+}
+[data-rehype-pretty-code-figure] pre {
+  @apply overflow-x-auto p-4 text-sm leading-relaxed;
+}
+[data-rehype-pretty-code-figure] code {
+  @apply font-mono;
+}
+[data-rehype-pretty-code-figure] [data-line] {
+  @apply px-2;
+}
+[data-rehype-pretty-code-figure] [data-highlighted-line] {
+  @apply rounded bg-foreground/5;
+}
+[data-rehype-pretty-code-title] {
+  @apply border-b border-border bg-muted/50 px-4 py-2 text-xs font-medium text-muted-foreground;
+}
+/* 行内代码 */
+:not(pre) > code {
+  @apply rounded-md border border-border bg-muted px-1.5 py-0.5 font-mono text-[0.85em];
+}
+
+/* Mermaid 容器 */
+.mermaid-wrap {
+  @apply my-6 flex justify-center overflow-x-auto rounded-xl border border-border bg-card p-6;
+}
+
+/* KaTeX */
+.katex-display {
+  @apply my-6 overflow-x-auto;
+}

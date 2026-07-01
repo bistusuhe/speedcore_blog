@@ -1,0 +1,179 @@
+{
+  "metadata": {
+    "title": "SPEEDCORE · Su He — AI Agent Developer & Game Developer Lover",
+    "description": "SPEEDCORE's personal tech blog and project showcase. An undergraduate in Data Science and Big Data Technology, an AI Agent developer, and a game development enthusiast. Notes on AI Agents, Unity, Java, algorithms, and essays.",
+    "keywords": "Su He, AI Agent, Unity, Java, Data Science, blog, personal site"
+  },
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "projects": "Projects",
+    "timeline": "Timeline",
+    "contact": "Contact",
+    "search": "Search"
+  },
+  "hero": {
+    "name": "SPEEDCORE",
+    "nameEn": "SPEEDCORE",
+    "tagline": "AI Agent Developer · Game Developer Lover",
+    "subtitle": "CHANGE THE WORLD WITH AI AGENTS",
+    "cta": {
+      "about": "About Me",
+      "blog": "Read Blog",
+      "github": "GitHub",
+      "contact": "Contact Me"
+    },
+    "scroll": "Scroll Down"
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "About Me",
+    "education": "Education",
+    "major": "Data Science and Big Data Technology",
+    "bio": "I am SPEEDCORE, an undergraduate majoring in Data Science and Big Data Technology. I focus on **AI Agent** development and enjoy turning ideas into running products. I am also a long-time Unity game development enthusiast."
+  },
+  "skills": {
+    "title": "Skills",
+    "subtitle": "Skills",
+    "categories": {
+      "language": "Programming Languages",
+      "framework": "Frameworks",
+      "tool": "Tools",
+      "ai": "AI / Agent"
+    }
+  },
+  "projects": {
+    "title": "Latest Projects",
+    "subtitle": "Latest Projects",
+    "viewAll": "View All",
+    "viewDetail": "View Details",
+    "github": "GitHub",
+    "demo": "Live Demo"
+  },
+  "articles": {
+    "title": "Latest Articles",
+    "subtitle": "Latest Articles",
+    "viewAll": "View All",
+    "readMore": "Read More"
+  },
+  "internship": {
+    "title": "Internship Experience",
+    "subtitle": "Internship Experience"
+  },
+  "awards": {
+    "title": "Awards and Honors",
+    "subtitle": "Awards"
+  },
+  "interests": {
+    "title": "Interests and Hobbies",
+    "subtitle": "Interests"
+  },
+  "github": {
+    "title": "GitHub Activity",
+    "subtitle": "GitHub Contribution",
+    "repos": "Repositories",
+    "stars": "Stars",
+    "followers": "Followers",
+    "contributions": "Contributions in the Last Year",
+    "pinned": "Pinned Repositories",
+    "failed": "Unable to load GitHub data right now. Please try again later."
+  },
+  "techstack": {
+    "title": "Tech Stack",
+    "subtitle": "Tech Stack"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Blog",
+    "all": "All",
+    "category": "Category",
+    "tag": "Tag",
+    "archive": "Archive",
+    "categories": "Categories",
+    "tags": "Tags",
+    "readTime": "min read",
+    "views": "views",
+    "likes": "likes",
+    "toc": "Table of Contents",
+    "related": "Related Posts",
+    "prev": "Previous",
+    "next": "Next",
+    "backToTop": "Back to Top",
+    "share": "Share",
+    "like": "Like",
+    "empty": "No articles yet",
+    "searchPlaceholder": "Search articles…",
+    "count": "{count} articles"
+  },
+  "timeline": {
+    "title": "Timeline",
+    "subtitle": "Timeline",
+    "types": {
+      "study": "Study",
+      "contest": "Competition",
+      "internship": "Internship",
+      "award": "Award",
+      "project": "Project"
+    }
+  },
+  "contact": {
+    "title": "Contact Me",
+    "subtitle": "Contact",
+    "github": "GitHub",
+    "email": "Email",
+    "wechat": "WeChat",
+    "wechatTip": "Scan the code to add me on WeChat",
+    "copy": "Copy",
+    "copied": "Copied",
+    "form": {
+      "name": "Your name",
+      "email": "Your email",
+      "message": "Message",
+      "submit": "Send Message",
+      "success": "Your message has been recorded. I will reply as soon as possible.",
+      "namePlaceholder": "How should I address you",
+      "emailPlaceholder": "your@email.com",
+      "messagePlaceholder": "What would you like to say…"
+    }
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search articles, projects, tags…",
+    "empty": "Enter keywords to start searching",
+    "noResult": "No relevant results found",
+    "hint": "Press Ctrl / ⌘ + K anytime",
+    "resultsFor": "Search results for “{query}”"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "toggle": "Toggle Theme"
+  },
+  "language": {
+    "toggle": "Switch Language",
+    "zh": "中文",
+    "en": "English"
+  },
+  "music": {
+    "toggle": "Player",
+    "play": "Play",
+    "pause": "Pause",
+    "next": "Next",
+    "hide": "Hide",
+    "show": "Show Player"
+  },
+  "common": {
+    "loading": "Loading…",
+    "back": "Back",
+    "home": "Home",
+    "notFound": "Page not found",
+    "notFoundDesc": "The page you are looking for does not exist or has been moved.",
+    "backHome": "Back to Home",
+    "builtWith": "Powered by Next.js"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "desc": "AI Agent Developer · Game Developer Lover"
+  }
+}

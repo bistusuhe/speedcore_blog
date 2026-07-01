@@ -1,0 +1,69 @@
+---
+title: 'Unity Shader 入门：从流动光效说起'
+description: '用一段最简单的 Shader 实现角色身上的流动光带，理解 UV、时间变量与片段着色器。'
+date: '2025-01-22'
+category: 'Unity'
+tags: ['Unity', 'Shader', '游戏开发', '图形学']
+cover: '/images/posts/shader-cover.svg'
+author: '苏和'
+pinned: true
+lang: 'zh'
+---
+
+import Callout from '@/components/blog/callout'
+
+Shader 听起来高深，本质就是把「屏幕上每个像素该是什么颜色」用代码描述出来。本文用一个**流动光带**效果入门。
+
+## 目标效果
+
+让模型表面出现一道沿 UV 方向循环流动的高亮光带，常用于宝箱、技能特效。
+
+## 完整 Shader
+
+```hlsl
+Shader "Custom/FlowBand" {
+    Properties {
+        _MainTex ("Main Tex", 2D) = "white" {}
+        _BandColor ("Band Color", Color) = (1,1,1,1)
+        _Speed ("Speed", Range(0, 5)) = 1.0
+        _Width ("Width", Range(0.01, 0.5)) = 0.1
+    }
+    SubShader {
+        Tags { "RenderType"="Opaque" }
+        CGPROGRAM
+        #pragma surface surf Lambert
+        struct Input { float2 uv_MainTex; };
+        sampler2D _MainTex;
+        fixed4 _BandColor;
+        float _Speed, _Width;
+        void surf (Input IN, inout SurfaceOutput o) {
+            fixed4 c = tex2D(_MainTex, IN.uv_MainTex);
+            float pos = frac(IN.uv_MainTex.x + _Time.y * _Speed);
+            float band = smoothstep(1.0 - _Width, 1.0, pos)
+                       - smoothstep(1.0, 1.0, pos);
+            o.Albedo = c.rgb + _BandColor.rgb * band;
+        }
+        ENDCG
+    }
+}
+```
+
+<Callout type="tip" title="关键点">
+`_Time.y` 是 Unity 内置的时间变量；`frac` 让 UV 取小数部分实现循环；两个 `smoothstep` 相减得到一条宽度可控的光带。
+</Callout>
+
+## 调参建议
+
+- 想要光带更柔和：增大 `_Width` 或使用 `pow(band, 0.5)`。
+- 想要彩虹色：把 `_BandColor` 换成基于 `pos` 的 HSV 采样。
+- 想要跟随角色移动方向：把世界空间坐标投影到 UV。
+
+## 数学基础
+
+光带强度沿 UV.x 的高斯分布近似：
+
+$$
+I(x, t) = \exp\left(-\frac{(x - v t \bmod 1)^2}{2\sigma^2}\right)
+$$
+
+下一篇我们会把这个效果升级为**屏幕后处理描边**，敬请期待。

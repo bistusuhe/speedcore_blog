@@ -1,0 +1,72 @@
+---
+title: '动态规划：从背包问题到状态压缩优化'
+description: '一篇讲清 0/1 背包、完全背包与位运算状态压缩，附可运行 Python 代码。'
+date: '2025-03-20'
+category: '算法'
+tags: ['算法', '动态规划', '背包', '位运算']
+author: '苏和'
+lang: 'zh'
+---
+
+## 0/1 背包回顾
+
+有 $n$ 件物品，第 $i$ 件重量 $w_i$、价值 $v_i$，背包容量 $W$，每件物品最多取一次。求最大价值。
+
+状态转移：
+
+$$
+dp[i][j] = \max(dp[i-1][j],\ dp[i-1][j-w_i] + v_i)
+$$
+
+## 空间优化：滚动一维
+
+```python
+def knapsack01(w, v, W):
+    dp = [0] * (W + 1)
+    for i in range(len(w)):
+        for j in range(W, w[i] - 1, -1):   # 必须倒序
+            dp[j] = max(dp[j], dp[j - w[i]] + v[i])
+    return dp[W]
+```
+
+> **为什么倒序？** 因为每件物品只能用一次，倒序保证 `dp[j-w[i]]` 用的还是上一层的结果。
+
+## 完全背包
+
+只需把内层循环改成**正序**，就允许同一物品取多次：
+
+```python
+def knapsack_complete(w, v, W):
+    dp = [0] * (W + 1)
+    for i in range(len(w)):
+        for j in range(w[i], W + 1):       # 正序
+            dp[j] = max(dp[j], dp[j - w[i]] + v[i])
+    return dp[W]
+```
+
+## 状态压缩：位运算加速子集枚举
+
+当 $n \le 20$ 时，可用 bitmask 枚举所有子集：
+
+```python
+def subset_sum(nums, target):
+    n = len(nums)
+    for mask in range(1 << n):
+        s = 0
+        for i in range(n):
+            if mask & (1 << i):
+                s += nums[i]
+        if s == target:
+            return mask
+    return -1
+```
+
+## 复杂度
+
+| 算法 | 时间 | 空间 |
+| --- | --- | --- |
+| 0/1 背包（二维） | $O(nW)$ | $O(nW)$ |
+| 0/1 背包（滚动） | $O(nW)$ | $O(W)$ |
+| 子集枚举 | $O(2^n \cdot n)$ | $O(1)$ |
+
+掌握这些套路，绝大多数 DP 题都能找到切入点。

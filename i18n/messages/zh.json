@@ -1,0 +1,179 @@
+{
+  "metadata": {
+    "title": "SPEEDCORE · Su He — AI Agent Developer & Game Developer Lover",
+    "description": "speedcore的个人技术博客与项目展示站。数据科学与大数据技术、AI Agent 开发者、游戏开发爱好者。记录 AI Agent、Unity、Java、算法与随笔。",
+    "keywords": "Su He, AI Agent, Unity, Java, 数据科学, 博客, 个人网站"
+  },
+  "nav": {
+    "home": "首页",
+    "blog": "博客",
+    "projects": "项目",
+    "timeline": "时间线",
+    "contact": "联系",
+    "search": "搜索"
+  },
+  "hero": {
+    "name": "speedcore",
+    "nameEn": "speedcore",
+    "tagline": "AI Agent Developer · Game Developer Lover",
+    "subtitle": "CHANGE THE WORLD WITH AI AGENTS",
+    "cta": {
+      "about": "关于我",
+      "blog": "阅读博客",
+      "github": "GitHub",
+      "contact": "联系我"
+    },
+    "scroll": "向下滚动"
+  },
+  "about": {
+    "title": "关于我",
+    "subtitle": "About Me",
+    "education": "专业",
+    "major": "数据科学与大数据技术",
+    "bio": "我是speedcore，一名数据科学与大数据技术专业的本科生。我专注于 **AI Agent** 开发，喜欢把想法变成可以运行的产品；同时是 Unity 游戏开发的长期爱好者。"
+  },
+  "skills": {
+    "title": "技能栈",
+    "subtitle": "Skills",
+    "categories": {
+      "language": "编程语言",
+      "framework": "框架",
+      "tool": "工具",
+      "ai": "AI / Agent"
+    }
+  },
+  "projects": {
+    "title": "最新项目",
+    "subtitle": "Latest Projects",
+    "viewAll": "查看全部",
+    "viewDetail": "查看详情",
+    "github": "GitHub",
+    "demo": "在线演示"
+  },
+  "articles": {
+    "title": "最新文章",
+    "subtitle": "Latest Articles",
+    "viewAll": "查看全部",
+    "readMore": "阅读全文"
+  },
+  "internship": {
+    "title": "实习经历",
+    "subtitle": "Internship Experience"
+  },
+  "awards": {
+    "title": "获奖荣誉",
+    "subtitle": "Awards"
+  },
+  "interests": {
+    "title": "兴趣爱好",
+    "subtitle": "Interests"
+  },
+  "github": {
+    "title": "GitHub 动态",
+    "subtitle": "GitHub Contribution",
+    "repos": "仓库",
+    "stars": "Star",
+    "followers": "关注者",
+    "contributions": "过去一年贡献",
+    "pinned": "置顶仓库",
+    "failed": "暂时无法加载 GitHub 数据，请稍后再试。"
+  },
+  "techstack": {
+    "title": "技术栈",
+    "subtitle": "Tech Stack"
+  },
+  "blog": {
+    "title": "博客",
+    "subtitle": "Blog",
+    "all": "全部",
+    "category": "分类",
+    "tag": "标签",
+    "archive": "归档",
+    "categories": "分类",
+    "tags": "标签",
+    "readTime": "分钟阅读",
+    "views": "次阅读",
+    "likes": "赞",
+    "toc": "目录",
+    "related": "相关推荐",
+    "prev": "上一篇",
+    "next": "下一篇",
+    "backToTop": "返回顶部",
+    "share": "分享",
+    "like": "点赞",
+    "empty": "暂无文章",
+    "searchPlaceholder": "搜索文章…",
+    "count": "{count} 篇文章"
+  },
+  "timeline": {
+    "title": "时间线",
+    "subtitle": "Timeline",
+    "types": {
+      "study": "学习",
+      "contest": "比赛",
+      "internship": "实习",
+      "award": "获奖",
+      "project": "项目"
+    }
+  },
+  "contact": {
+    "title": "联系我",
+    "subtitle": "Contact",
+    "github": "GitHub",
+    "email": "邮箱",
+    "wechat": "微信",
+    "wechatTip": "扫码加我微信",
+    "copy": "复制",
+    "copied": "已复制",
+    "form": {
+      "name": "你的称呼",
+      "email": "你的邮箱",
+      "message": "留言内容",
+      "submit": "发送留言",
+      "success": "已记录你的留言，我会尽快回复。",
+      "namePlaceholder": "如何称呼你",
+      "emailPlaceholder": "your@email.com",
+      "messagePlaceholder": "想和我说点什么…"
+    }
+  },
+  "search": {
+    "title": "搜索",
+    "placeholder": "搜索文章、项目、标签…",
+    "empty": "输入关键词开始搜索",
+    "noResult": "没有找到相关结果",
+    "hint": "按 Ctrl / ⌘ + K 随时唤起",
+    "resultsFor": "“{query}” 的搜索结果"
+  },
+  "theme": {
+    "light": "浅色",
+    "dark": "深色",
+    "system": "跟随系统",
+    "toggle": "切换主题"
+  },
+  "language": {
+    "toggle": "切换语言",
+    "zh": "中文",
+    "en": "English"
+  },
+  "music": {
+    "toggle": "播放器",
+    "play": "播放",
+    "pause": "暂停",
+    "next": "下一首",
+    "hide": "隐藏",
+    "show": "显示播放器"
+  },
+  "common": {
+    "loading": "加载中…",
+    "back": "返回",
+    "home": "首页",
+    "notFound": "页面走丢了",
+    "notFoundDesc": "你访问的页面不存在或已被移动。",
+    "backHome": "返回首页",
+    "builtWith": "由 Next.js 强力驱动"
+  },
+  "footer": {
+    "rights": "保留所有权利。",
+    "desc": "AI Agent Developer · Game Developer Lover"
+  }
+}

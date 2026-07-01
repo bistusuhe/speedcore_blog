@@ -1,0 +1,70 @@
+# speedcore博客 - 生产部署编排
+# 用法：
+#   1. 复制 .env.example 为 .env 并填写真实值
+#   2. docker compose up -d --build
+#   3. docker compose logs -f blog
+
+services:
+  blog:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # 构建期注入 NEXT_PUBLIC_*（会被内联到客户端产物）
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://suhe.dev}
+        NEXT_PUBLIC_SITE_NAME: ${NEXT_PUBLIC_SITE_NAME:-speedcore}
+        NEXT_PUBLIC_GITHUB_USERNAME: ${NEXT_PUBLIC_GITHUB_USERNAME:-suhe}
+        NEXT_PUBLIC_GISCUS_REPO: ${NEXT_PUBLIC_GISCUS_REPO:-owner/repo}
+        NEXT_PUBLIC_GISCUS_REPO_ID: ${NEXT_PUBLIC_GISCUS_REPO_ID:-}
+        NEXT_PUBLIC_GISCUS_CATEGORY: ${NEXT_PUBLIC_GISCUS_CATEGORY:-Announcements}
+        NEXT_PUBLIC_GISCUS_CATEGORY_ID: ${NEXT_PUBLIC_GISCUS_CATEGORY_ID:-}
+        NEXT_PUBLIC_EMAIL: ${NEXT_PUBLIC_EMAIL:-suhe@example.com}
+        NEXT_PUBLIC_WECHAT_QR: ${NEXT_PUBLIC_WECHAT_QR:-/images/wechat-qr.png}
+        NEXT_PUBLIC_MUSIC_TRACKS: ${NEXT_PUBLIC_MUSIC_TRACKS:-}
+    container_name: suhe-blog
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      # 运行期环境变量（仅服务端可读）
+      - NODE_ENV=production
+      - HOSTNAME=0.0.0.0
+      - PORT=3000
+      - GITHUB_TOKEN=${GITHUB_TOKEN:-}
+    volumes:
+      # 持久化 Next.js 图片缓存（避免每次重启重新生成）
+      - blog-cache:/app/.next/cache
+    networks:
+      - suhe-net
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://127.0.0.1:3000/zh', r => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  # Nginx 反向代理：终止 TLS、压缩、缓存静态资源、限流
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: suhe-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./certs:/etc/nginx/certs:ro
+      - nginx-logs:/var/log/nginx
+    depends_on:
+      blog:
+        condition: service_healthy
+    networks:
+      - suhe-net
+
+networks:
+  suhe-net:
+    driver: bridge
+
+volumes:
+  blog-cache:
+  nginx-logs:
