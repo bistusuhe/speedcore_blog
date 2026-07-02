@@ -1,42 +1,29 @@
 ---
-title: 'Neon Drift — 赛博朋克跑酷小游戏'
-description: '一款用 Unity 制作的无限跑酷游戏，主打霓虹视觉、流畅手感与程序化关卡。'
-date: '2024-11-01'
+title: '斗地主'
+description: '一个斗地主展示页面'
+date: '2026-07-02'
 category: 'Game'
 tags: ['Unity', 'C#', 'Shader', '游戏开发']
 cover: '/images/projects/neon-drift.svg'
-github: 'https://github.com/your-username/neon-drift'
-demo: 'https://example.com'
+github: 'https://github.com/bistusuhe/DouDiZhu'
+demo: 'https://bistusuhe.github.io/DouDiZhu/'
 pinned: true
 lang: 'zh'
 ---
 
 ## 项目简介
 
-Neon Drift 是我练习 Unity 手感打磨与 Shader 的作品。玩家在赛博朋克都市中跑酷，躲避障碍、收集能量。
+斗地主
 
-## 我的职责
-
-- 全部玩法与关卡程序化生成
-- 自研后处理描边 + Bloom Shader
-- 触屏 / 键盘双输入适配
 
 ## 技术亮点
 
 ### 程序化关卡
 
-用 Wave Function Collapse 思想生成无尽轨道，保证可达性与节奏感。
 
-### 自研 Shader
 
-```hlsl
-half4 frag(v2f i) : SV_Target {
-    half4 col = tex2D(_MainTex, i.uv);
-    half edge = 1 - saturate(abs(dot(normalize(i.viewDir, i.normal)));
-    col.rgb += _NeonColor * pow(edge, _Power);
-    return col;
-}
-```
+
+
 
 ## 数据
 
