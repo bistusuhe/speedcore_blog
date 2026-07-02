@@ -4,7 +4,7 @@
   "private": true,
   "description": "speedcore（Su He）个人技术博客 + 项目展示网站",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

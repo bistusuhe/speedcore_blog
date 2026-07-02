@@ -13,6 +13,13 @@ const prettyCodeOptions: PrettyCodeOptions = {
   theme: { dark: 'github-dark-dimmed', light: 'github-light' },
   keepBackground: true,
   defaultLang: 'plaintext',
+  // 限制预加载的语言，减少 Shiki 初始化开销
+  langs: [
+    'typescript', 'tsx', 'javascript', 'jsx',
+    'python', 'java', 'xml', 'hlsl',
+    'json', 'yaml', 'bash', 'shell', 'css',
+    'markdown', 'plaintext', 'text',
+  ],
   onVisitLine(node) {
     if (node.children.length === 0) {
       node.children = [{ type: 'text', value: ' ' }]

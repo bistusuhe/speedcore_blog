@@ -6,7 +6,6 @@ const config: Config = {
     './app/**/*.{ts,tsx,mdx}',
     './components/**/*.{ts,tsx}',
     './config/**/*.{ts,tsx}',
-    './content/**/*.{md,mdx}',
   ],
   theme: {
     container: {

@@ -1,4 +1,5 @@
 import 'server-only'
+import { cache } from 'react'
 import fs from 'node:fs'
 import path from 'node:path'
 import matter from 'gray-matter'
@@ -27,7 +28,8 @@ function readProjectFile(filePath: string): Project | null {
   }
 }
 
-export function getAllProjects(): Project[] {
+/** 获取全部项目（按日期倒序），同一渲染周期内自动去重 */
+export const getAllProjects = cache((): Project[] => {
   if (!fs.existsSync(PROJECTS_DIR)) return []
   const files = glob.sync('**/*.{md,mdx}', { cwd: PROJECTS_DIR })
   const projects = files
@@ -40,18 +42,12 @@ export function getAllProjects(): Project[] {
     })
     .filter((p): p is Project => p !== null)
   return projects.sort((a, b) => +new Date(b.date) - +new Date(a.date))
-}
+})
 
-export function getProjectBySlug(slug: string): Project | null {
-  const files = glob.sync('**/*.{md,mdx}', { cwd: PROJECTS_DIR })
-  const target = files.find((f) => slugify(path.basename(f)) === slug)
-  if (!target) return null
-  try {
-    return readProjectFile(path.join(PROJECTS_DIR, target))
-  } catch {
-    return null
-  }
-}
+/** 根据 slug 获取单个项目（复用 getAllProjects 缓存） */
+export const getProjectBySlug = cache((slug: string): Project | null => {
+  return getAllProjects().find((p) => p.slug === slug) ?? null
+})
 
 export function getProjectCategories(): { name: string; count: number }[] {
   const projects = getAllProjects()

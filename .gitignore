@@ -12,6 +12,15 @@ next-env.d.ts
 # production
 /build
 
+# eslint
+.eslintcache
+
+# swc
+.swc/
+
+# husky
+.husky/_/
+
 # misc
 .DS_Store
 *.pem

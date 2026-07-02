@@ -1,4 +1,5 @@
 import 'server-only'
+import { cache } from 'react'
 import fs from 'node:fs'
 import path from 'node:path'
 import matter from 'gray-matter'
@@ -31,8 +32,8 @@ function readPostFile(filePath: string): Post | null {
   }
 }
 
-/** 获取全部文章（按日期倒序） */
-export function getAllPosts(): Post[] {
+/** 获取全部文章（按日期倒序），同一渲染周期内自动去重 */
+export const getAllPosts = cache((): Post[] => {
   if (!fs.existsSync(POSTS_DIR)) return []
   const files = glob.sync('**/*.{md,mdx}', { cwd: POSTS_DIR })
   const posts = files
@@ -45,19 +46,12 @@ export function getAllPosts(): Post[] {
     })
     .filter((p): p is Post => p !== null)
   return posts.sort((a, b) => +new Date(b.date) - +new Date(a.date))
-}
+})
 
-/** 根据 slug 获取单篇 */
-export function getPostBySlug(slug: string): Post | null {
-  const files = glob.sync('**/*.{md,mdx}', { cwd: POSTS_DIR })
-  const target = files.find((f) => slugify(path.basename(f)) === slug)
-  if (!target) return null
-  try {
-    return readPostFile(path.join(POSTS_DIR, target))
-  } catch {
-    return null
-  }
-}
+/** 根据 slug 获取单篇（复用 getAllPosts 缓存，不重复扫描磁盘） */
+export const getPostBySlug = cache((slug: string): Post | null => {
+  return getAllPosts().find((p) => p.slug === slug) ?? null
+})
 
 /** 获取全部分类 */
 export function getAllCategories(): { name: string; count: number }[] {
