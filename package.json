@@ -10,7 +10,8 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "publish:post": "node scripts/publish-content.mjs"
   },
   "dependencies": {
     "@giscus/react": "3.1.0",
