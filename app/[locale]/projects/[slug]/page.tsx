@@ -117,8 +117,13 @@ export default async function ProjectDetailPage({
         </div>
       </Container>
 
-      <Container size="narrow" className="py-12 prose prose-neutral dark:prose-invert max-w-none">
-        {mdx}
+      <Container size="narrow" className="py-12">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_220px]">
+          <div className="prose prose-neutral max-w-none dark:prose-invert">
+            {mdx}
+          </div>
+          <div className="hidden lg:block" />
+        </div>
       </Container>
 
       <BackToTop />
