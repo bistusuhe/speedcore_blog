@@ -58,7 +58,7 @@ export async function PostHeader({ post, locale }: PostHeaderProps) {
           </span>
           <span className="inline-flex items-center gap-1.5">
             <Clock className="h-3.5 w-3.5" />
-            {post.readingTime} {t('readTime')}
+            {t('readTime', { minutes: post.readingTime })}
           </span>
         </div>
 

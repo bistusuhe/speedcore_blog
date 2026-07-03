@@ -46,7 +46,7 @@ export function PostCard({ post }: PostCardProps) {
             </span>
             <span className="inline-flex items-center gap-1">
               <Clock className="h-3 w-3" />
-              {post.readingTime} {t('readTime')}
+              {t('readTime', { minutes: post.readingTime })}
             </span>
           </div>
           <h3 className="text-lg font-semibold leading-snug tracking-tight transition-colors group-hover:text-foreground">
