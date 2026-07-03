@@ -1,6 +1,6 @@
 ---
 title: '解读github开源项目learn-claude-code第一期'
-description: '以ClaudeCode的实现思想为例，理解HarnessAgent'
+description: '理解Harness的意义'
 date: '2026-07-01'
 category: 'AI Agent'
 tags: ['AI Agent', 'Python', 'ClaudeCode', 'harness']
@@ -12,14 +12,30 @@ lang: 'zh'
 import Callout from '@/components/blog/callout'
 import Mermaid from '@/components/blog/mermaid'
 
-## Agent从来不是高高在上的产物，我们触手可及
+## 在理解Agent前，我们从熟悉的网页版AI入手
 
-很多同学谈及AIAgent特别是claudecode这种大型项目，总会觉得头大，50w源码确实不是一个小数目，但我们从来不是去学习它的具体实现而是它的实现思想。
-我接下来将从大模型的API调用，AnthropicSDK中的参数意义（适配大部分模型商）等方面带你入门。
+网页版本AI聊天网站比如deepseek，ChatGPT，Gemini等等，他们并非纯粹的API调用（这里后面会再提到），而是一个带有工具的AI，它们有的可以识别图片，搜索网站，输出图片等等。
+harness，便是这些工具的总称，翻译过来是缰绳的意思，大模型就像骑在马上一样，依靠缰绳去驱动这匹马达到自己的目的。当然，这些工具能够被模型调用，都进行了深度的封装，harness还可以是更细微的函数单元。
+而Agent就是大模型加harness的集成。
 
-<Callout type="info" title="温馨提示">
-这是一篇示例文章 没有具体技术实现 仅用于引入
+## harness还可以是什么？
+
+harness可以是一个编写函数def write() ，或者一个阅读函数def read()，它们的实现难度不亚于Python课堂认真听讲10分钟，但他们却是大模型最重要的“四肢”，
+我们可以继续借助这两个函数实现def bash（）来实现对命令行的读取写入等等，那么到这一步你可能觉得，这函数倒是有了，我也知道怎么用，但AI怎么知道怎么用？它怎么知道传什么参数？这里先卖个关子，下一章会揭晓答案。
+
+## 什么是Agent？
+
+Agent翻译过来是代理人的意思，它可以代替你去完成一些任务，就像旅游时你联系的旅行团，你不需要和景区联系，不需要订哪个酒店，这一切代理人都帮你做好了，所以不难发现Agent的核心就是 独立完成任务。
+那你不禁想到，如今的模型今时不同往日，思考能力和推理能力都显著提升，我每次在网页端问完一个问题，它回复完就结束了，我倘若让它回复完自己再问呢？于是你大手一挥，“不就是一个while循环嘛！”
+
+恭喜你，发现了Agent的本质。
+
+## 一点题外话
+
+很多同学谈及AIAgent特别是claudecode这种大型项目，总会觉得头大，虽然50w的Claude源码确实不是一个小数目，但我们从来不是去学习它的具体实现，而是它的实现思想。
+
+如果对本系列博客感兴趣欢迎继续阅读下一章内容！
+
+<Callout type="info" title="小小建议">
+本系列博客没有源码与demo，建议与learnclaudecode项目一同阅读，我的初衷是补充完善原文章没有涉及或不清楚但可能会影响到大家学习的内容。
 </Callout>
-首先很多同学经常用到的网页版本AI聊天网站比如deepseek，ChatGPT等等，他们并非纯粹的API调用
-
-## 为实现AGI需要全人类一同努力！！
