@@ -111,11 +111,14 @@ function main() {
     return
   }
 
-  // 推送到当前分支的远程上游
+  // 推送到 main 分支以触发 Vercel 自动部署
   const branch = run('git rev-parse --abbrev-ref HEAD', { silent: true })
   run(`git push origin ${branch}`)
+  if (branch !== 'main') {
+    run(`git push origin ${branch}:main`)
+  }
   console.log(
-    `${COLORS.green}✓ 已推送到 origin/${branch}，Vercel 将自动开始部署。${COLORS.reset}`,
+    `${COLORS.green}✓ 已推送，Vercel 将自动开始部署。${COLORS.reset}`,
   )
 }
 
