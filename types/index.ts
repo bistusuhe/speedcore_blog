@@ -38,15 +38,6 @@ export interface Skill {
 }
 export type SkillCategory = 'language' | 'framework' | 'tool' | 'ai'
 
-/** 时间线条目 */
-export interface TimelineItem {
-  date: string
-  title: { zh: string; en: string }
-  description: { zh: string; en: string }
-  type: 'study' | 'contest' | 'internship' | 'award' | 'project'
-  link?: string
-}
-
 /** 经历条目（实习） */
 export interface ExperienceItem {
   period: { zh: string; en: string }

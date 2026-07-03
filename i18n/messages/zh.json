@@ -8,7 +8,6 @@
     "home": "首页",
     "blog": "博客",
     "projects": "项目",
-    "timeline": "时间线",
     "contact": "联系",
     "search": "搜索"
   },
@@ -104,17 +103,6 @@
     "empty": "暂无文章",
     "searchPlaceholder": "搜索文章…",
     "count": "{count} 篇文章"
-  },
-  "timeline": {
-    "title": "时间线",
-    "subtitle": "Timeline",
-    "types": {
-      "study": "学习",
-      "contest": "比赛",
-      "internship": "实习",
-      "award": "获奖",
-      "project": "项目"
-    }
   },
   "contact": {
     "title": "联系我",

@@ -8,7 +8,6 @@
     "home": "Home",
     "blog": "Blog",
     "projects": "Projects",
-    "timeline": "Timeline",
     "contact": "Contact",
     "search": "Search"
   },
@@ -104,17 +103,6 @@
     "empty": "No articles yet",
     "searchPlaceholder": "Search articles…",
     "count": "{count} articles"
-  },
-  "timeline": {
-    "title": "Timeline",
-    "subtitle": "Timeline",
-    "types": {
-      "study": "Study",
-      "contest": "Competition",
-      "internship": "Internship",
-      "award": "Award",
-      "project": "Project"
-    }
   },
   "contact": {
     "title": "Contact Me",
