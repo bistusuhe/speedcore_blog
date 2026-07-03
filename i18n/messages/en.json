@@ -91,7 +91,7 @@
     "archive": "Archive",
     "categories": "Categories",
     "tags": "Tags",
-    "readTime": "min read",
+    "readTime": "Estimated reading time: {minutes} min",
     "views": "views",
     "likes": "likes",
     "toc": "Table of Contents",

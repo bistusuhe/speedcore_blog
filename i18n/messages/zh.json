@@ -91,7 +91,7 @@
     "archive": "归档",
     "categories": "分类",
     "tags": "标签",
-    "readTime": "分钟阅读",
+    "readTime": "预估阅读时长：{minutes}分钟",
     "views": "次阅读",
     "likes": "赞",
     "toc": "目录",
