@@ -17,27 +17,13 @@ export const internships: ExperienceItem[] = [
 /** 获奖 */
 export const awards: AwardItem[] = [
   {
-    date: '2024-09',
-    title: { zh: '全国大学生数学建模竞赛', en: 'CUMCM' },
-    level: { zh: '国家二等奖', en: 'National 2nd Prize' },
+    date: '2024-06',
+    title: { zh: '蓝桥杯全国软件和信息技术专业人才大赛', en: 'Blue Bridge Cup' },
+    level: { zh: '省二等奖', en: 'Provincial 2nd Prize' },
     description: {
-      zh: '72 小时内完成建模、编程与论文撰写。',
-      en: 'Completed modeling, coding and paper writing in 72 hours.',
+      zh: '算法与数据结构竞赛。',
+      en: 'Algorithm and data structure competition.',
     },
-  },
-  {
-    date: '2023-06',
-    title: { zh: 'AI Agent 创新赛', en: 'AI Agent Innovation Contest' },
-    level: { zh: '省级二等奖', en: 'Provincial 2nd Prize' },
-    description: {
-      zh: '多智能体协作系统，队长。',
-      en: 'Multi-agent collaboration system, team lead.',
-    },
-  },
-  {
-    date: '2023-11',
-    title: { zh: 'ACM-ICPC 区域赛', en: 'ACM-ICPC Regional' },
-    level: { zh: '银奖', en: 'Silver' },
   },
 ]
 
