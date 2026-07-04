@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { Heart } from 'lucide-react'
 import { useTranslations } from 'next-intl'
@@ -10,50 +10,43 @@ interface LikeButtonProps {
   slug: string
 }
 
-const storageKey = (slug: string) => `like:${slug}`
-const likedKey = (slug: string) => `liked:${slug}`
-
-/** 文章点赞按钮（localStorage 持久化，点击弹跳动画） */
+/** 文章点赞按钮（服务端全局计数 + IP 去重） */
 export function LikeButton({ slug }: LikeButtonProps) {
   const t = useTranslations('blog')
   const [count, setCount] = useState(0)
   const [liked, setLiked] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [pending, setPending] = useState(false)
 
   useEffect(() => {
     setMounted(true)
-    try {
-      const raw = window.localStorage.getItem(storageKey(slug))
-      setCount(raw ? Number.parseInt(raw, 10) || 0 : 0)
-      setLiked(window.localStorage.getItem(likedKey(slug)) === '1')
-    } catch {
-      /* localStorage 不可用时静默降级 */
-    }
+    fetch(`/api/like?slug=${encodeURIComponent(slug)}`)
+      .then((r) => r.json())
+      .then((data: { count: number; liked: boolean }) => {
+        setCount(data.count)
+        setLiked(data.liked)
+      })
+      .catch(() => {})
   }, [slug])
 
-  const toggle = () => {
-    if (liked) {
-      const next = Math.max(0, count - 1)
-      setCount(next)
-      setLiked(false)
-      try {
-        window.localStorage.setItem(storageKey(slug), String(next))
-        window.localStorage.removeItem(likedKey(slug))
-      } catch {
-        /* ignore */
-      }
-    } else {
-      const next = count + 1
-      setCount(next)
-      setLiked(true)
-      try {
-        window.localStorage.setItem(storageKey(slug), String(next))
-        window.localStorage.setItem(likedKey(slug), '1')
-      } catch {
-        /* ignore */
-      }
+  const toggle = useCallback(async () => {
+    if (pending) return
+    setPending(true)
+    try {
+      const res = await fetch('/api/like', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug }),
+      })
+      const data: { count: number; liked: boolean } = await res.json()
+      setCount(data.count)
+      setLiked(data.liked)
+    } catch {
+      /* ignore */
+    } finally {
+      setPending(false)
     }
-  }
+  }, [slug, pending])
 
   return (
     <motion.button
@@ -77,9 +70,7 @@ export function LikeButton({ slug }: LikeButtonProps) {
         transition={{ type: 'spring', stiffness: 500, damping: 12 }}
         className="inline-flex"
       >
-        <Heart
-          className={cn('h-4 w-4', liked && 'fill-current')}
-        />
+        <Heart className={cn('h-4 w-4', liked && 'fill-current')} />
       </motion.span>
       <span>
         {mounted ? count : 0} {t('like')}

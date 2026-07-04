@@ -8,6 +8,7 @@ import { PostHeader } from '@/components/blog/post-header'
 import { Toc } from '@/components/blog/toc'
 import { LikeButton } from '@/components/blog/like-button'
 import { ShareButtons } from '@/components/blog/share-buttons'
+import { ViewCounter } from '@/components/blog/view-counter'
 import { RelatedPosts } from '@/components/blog/related-posts'
 import { PostPager } from '@/components/blog/post-pager'
 import { Comments } from '@/components/blog/comments'
@@ -93,12 +94,17 @@ export default async function PostPage({
         </Container>
 
         <Container size="narrow" className="space-y-12 py-12">
-          <ShareButtons
-            title={post.title}
-            slug={slug}
-            locale={activeLocale}
-          />
-          <LikeButton slug={slug} />
+          <div className="flex items-center justify-between">
+            <ViewCounter slug={slug} />
+            <div className="flex items-center gap-4">
+              <ShareButtons
+                title={post.title}
+                slug={slug}
+                locale={activeLocale}
+              />
+              <LikeButton slug={slug} />
+            </div>
+          </div>
           <RelatedPosts posts={related} />
           <PostPager prev={prev} next={next} locale={activeLocale} />
           <Comments locale={activeLocale} />
