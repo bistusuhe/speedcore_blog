@@ -14,55 +14,40 @@ lang: 'zh'
 import Callout from '@/components/blog/callout'
 import Mermaid from '@/components/blog/mermaid'
 
-## 为什么需要多智能体
+## 什么是API的调用？
 
-单个 Agent 在面对复杂任务时往往力不从心：上下文膨胀、工具过多、注意力分散。把任务拆给多个**职责单一**的 Agent，让它们通过共享黑板协作，是当下被验证有效的范式。
+大模型是部署在服务器上的，你的每次发送消息都是一个请求。还是以网页版本的AI聊天为例，当你在输入框输入一个问题 ：谁是最帅的人？按下回车一个json格式的文本被创建了，并通过网络协议发送给了大模型
+```python
+{
+  "request": {
+    "model": "gpt-5.5",
+    "messages": [
+      {"role": "user", "content": "谁是最帅的人"}
+    ]
+  },
+  "response": {
+    "choices": [
+      {
+        "message": {
+          "role": "assistant",
+          "content": "大概是speedcore吧！"
+        }
+      }
+    ]
+  }
+}
+```
+这是一段最最简洁的API调用，我接下来解释一下具体参数。
+你发出的消息为请求，即request，模型给出的回复即response。
+
 
 <Callout type="info" title="核心思路">
 一个 Orchestrator 负责任务分解与分发，若干 Worker Agent 负责执行，共享一个 Memory Store。
 </Callout>
 
-## 整体架构
 
-<Mermaid chart={`flowchart LR
-  U[用户输入] --> O[Orchestrator]
-  O --> M[(Memory Store)]
-  O --> W1[Search Agent]
-  O --> W2[Code Agent]
-  O --> W3[Writer Agent]
-  W1 --> M
-  W2 --> M
-  W3 --> M`} />
 
-## 关键代码
 
-下面是 Orchestrator 的核心分发逻辑：
-
-```python
-from dataclasses import dataclass
-from typing import Callable
-
-@dataclass
-class Task:
-    description: str
-    agent: str  # 目标 Agent 名称
-
-class Orchestrator:
-    def __init__(self, agents: dict[str, Callable], memory: Memory):
-        self.agents = agents
-        self.memory = memory
-
-    def run(self, goal: str) -> str:
-        plan = self._plan(goal)
-        results = []
-        for task in plan:
-            agent = self.agents[task.agent]
-            ctx = self.memory.recall(task.description)
-            out = agent(task.description, ctx)
-            self.memory.write(task.description, out)
-            results.append(out)
-        return self._summarize(results)
-```
 
 > **踩坑提示**：Memory 一定要做摘要压缩，否则长对话会迅速吃光 token 预算。
 
