@@ -13,6 +13,7 @@ import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { MusicPlayer } from '@/components/common/music-player'
 import { MouseGlow } from '@/components/motion/mouse-glow'
+import { ClickSpark } from '@/components/motion/click-spark'
 import siteConfig from '@/config/site'
 import { websiteJsonLd, personJsonLd } from '@/lib/seo'
 
@@ -52,6 +53,7 @@ export default async function LocaleLayout({
             />
 
             <MouseGlow />
+            <ClickSpark />
             <Header />
             <main className="relative z-10 min-h-screen pt-16">{children}</main>
             <Footer />

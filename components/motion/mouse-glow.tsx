@@ -8,8 +8,8 @@ export function MouseGlow({ className }: { className?: string }) {
   const reduce = useReducedMotion()
   const x = useMotionValue(-200)
   const y = useMotionValue(-200)
-  const sx = useSpring(x, { stiffness: 120, damping: 20 })
-  const sy = useSpring(y, { stiffness: 120, damping: 20 })
+  const sx = useSpring(x, { stiffness: 150, damping: 15 })
+  const sy = useSpring(y, { stiffness: 150, damping: 15 })
 
   useEffect(() => {
     if (reduce) return
@@ -39,7 +39,7 @@ export function MouseGlow({ className }: { className?: string }) {
         y: '-50%',
         pointerEvents: 'none',
         background:
-          'radial-gradient(circle, hsl(var(--foreground) / 0.06) 0%, transparent 60%)',
+          'radial-gradient(circle, hsl(var(--foreground) / 0.2) 0%, transparent 60%)',
         zIndex: 0,
       }}
     />
