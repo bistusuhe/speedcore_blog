@@ -126,16 +126,14 @@
 }
 
 /* 代码块样式（rehype-pretty-code） */
-[data-rehype-pretty-code-figure] {
+/* .prose 前缀确保覆盖 Tailwind Typography 的 prose pre 默认样式 */
+.prose [data-rehype-pretty-code-figure] {
   @apply relative my-6 w-full max-w-full rounded-xl border border-border bg-card;
-  overflow: hidden;
   overflow-x: auto;
 }
-[data-rehype-pretty-code-figure] pre {
-  @apply p-4 text-sm leading-relaxed;
+.prose [data-rehype-pretty-code-figure] pre {
+  @apply rounded-xl p-4 text-sm leading-relaxed;
   white-space: pre;
-  width: max-content;
-  min-width: 100%;
 }
 [data-rehype-pretty-code-figure] code {
   @apply font-mono;
