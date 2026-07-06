@@ -43,7 +43,7 @@ export default async function BlogPage({
           {categories.map((c) => (
             <Link
               key={c.name}
-              href={`/blog/category/${c.name}`}
+              href={`/blog/category/${encodeURIComponent(c.name)}`}
             >
               <Badge
                 variant="outline"

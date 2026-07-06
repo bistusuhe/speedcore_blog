@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils'
 export async function generateStaticParams() {
   const tags = getAllTags()
   return locales.flatMap((locale) =>
-    tags.map((tg) => ({ locale, tag: tg.name })),
+    tags.map((tg) => ({ locale, tag: encodeURIComponent(tg.name) })),
   )
 }
 
@@ -22,7 +22,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; tag: string }>
 }): Promise<Metadata> {
   const { tag } = await params
-  return { title: `#${tag}` }
+  return { title: `#${decodeURIComponent(tag)}` }
 }
 
 export default async function TagPage({
@@ -33,7 +33,8 @@ export default async function TagPage({
   const { locale, tag } = await params
   setRequestLocale(locale as 'zh' | 'en')
   const t = await getTranslations('blog')
-  const posts = getPostsByTag(tag)
+  const decoded = decodeURIComponent(tag)
+  const posts = getPostsByTag(decoded)
   const tags = getAllTags()
 
   return (
@@ -52,7 +53,7 @@ export default async function TagPage({
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
             {t('tag')}
           </p>
-          <h1 className="mt-2 text-display-lg tracking-tight">#{tag}</h1>
+          <h1 className="mt-2 text-display-lg tracking-tight">#{decoded}</h1>
           <p className="mt-2 text-sm text-muted-foreground">
             {t('count', { count: posts.length })}
           </p>
@@ -66,9 +67,9 @@ export default async function TagPage({
             </Badge>
           </Link>
           {tags.map((tg) => {
-            const active = tg.name.toLowerCase() === tag.toLowerCase()
+            const active = tg.name.toLowerCase() === decoded.toLowerCase()
             return (
-              <Link key={tg.name} href={`/blog/tag/${tg.name}`}>
+              <Link key={tg.name} href={`/blog/tag/${encodeURIComponent(tg.name)}`}>
                 <Badge
                   variant={active ? 'solid' : 'outline'}
                   className={cn(

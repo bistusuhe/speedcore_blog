@@ -45,7 +45,7 @@ export function buildSearchIndex(): SearchEntry[] {
       slug: c.name,
       title: c.name,
       description: `${c.count} posts`,
-      href: `/blog/category/${c.name}`,
+      href: `/blog/category/${encodeURIComponent(c.name)}`,
       content: c.name,
     })
   }
@@ -56,7 +56,7 @@ export function buildSearchIndex(): SearchEntry[] {
       slug: t.name,
       title: t.name,
       description: `${t.count} posts`,
-      href: `/blog/tag/${t.name}`,
+      href: `/blog/tag/${encodeURIComponent(t.name)}`,
       content: t.name,
     })
   }
