@@ -128,7 +128,7 @@
 /* 代码块样式（rehype-pretty-code） */
 /* .prose 前缀确保覆盖 Tailwind Typography 的 prose pre 默认样式 */
 .prose [data-rehype-pretty-code-figure] {
-  @apply relative my-6 w-full max-w-full rounded-xl border border-border bg-card;
+  @apply relative my-6 w-full max-w-full min-w-0 rounded-xl border border-border bg-card;
   overflow-x: auto;
 }
 .prose [data-rehype-pretty-code-figure] pre {

@@ -82,7 +82,7 @@ export default async function PostPage({
 
         <Container size="narrow" className="py-25">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_220px]">
-            <div className="prose prose-neutral max-w-none dark:prose-invert">
+            <div className="prose prose-neutral max-w-none dark:prose-invert min-w-0">
               {mdx}
             </div>
             <div className="hidden lg:block">
