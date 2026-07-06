@@ -4,14 +4,14 @@ description: 'leetcode'
 date: '2026-07-05'
 category: 'AI Agent'
 tags: ['java', '算法', 'leetcode']
-cover: '/images/posts/leetcode'
+cover: '/images/posts/leetcode.svg'
 author: 'speedcore'
 pinned: true
 lang: 'zh'
 ---
 整数数组 nums 按升序排列，数组中的值 互不相同 。
 
-在传递给函数之前，nums 在预先未知的某个下标 k（0 <= k < nums.length）上进行了 向左旋转，使数组变为 [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]]（下标 从 0 开始 计数）。例如， [0,1,2,4,5,6,7] 下标 3 上向左旋转后可能变为 [4,5,6,7,0,1,2] 。
+在传递给函数之前，nums 在预先未知的某个下标 k（`0 <= k < nums.length`）上进行了 向左旋转，使数组变为 `[nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]]`（下标 从 0 开始 计数）。例如， `[0,1,2,4,5,6,7]` 下标 3 上向左旋转后可能变为 `[4,5,6,7,0,1,2]` 。
 
 给你 旋转后 的数组 nums 和一个整数 target ，如果 nums 中存在这个目标值 target ，则返回它的下标，否则返回 -1 。
 
@@ -60,7 +60,7 @@ lang: 'zh'
 
 ##代码实现
 
-```python
+```java
 class Solution {
     public int search(int[] nums, int target) {
         if(nums.length==0)return -1;
