@@ -51,6 +51,9 @@ yarn-error.log*
 # editor
 .idea
 .vscode/*
+
+# playwright MCP
+.playwright-mcp/
 !.vscode/extensions.json
 
 # deployment secrets & runtime artifacts

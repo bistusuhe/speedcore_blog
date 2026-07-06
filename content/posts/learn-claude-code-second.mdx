@@ -1,8 +1,7 @@
 ---
 title: '解读github开源项目learn-claude-code第二期'
 description: '以ClaudeCode的实现思想为例，理解HarnessAgent'
-date: '2026-07-01'
-slug: 'learn-claude-code-second'
+date: '2026-07-06'
 category: 'AI Agent'
 tags: ['AI Agent', 'Python', 'ClaudeCode', 'harness']
 cover: '/images/posts/agent-cover.svg'
@@ -14,65 +13,149 @@ lang: 'zh'
 import Callout from '@/components/blog/callout'
 import Mermaid from '@/components/blog/mermaid'
 
+##前置知识 Json
+
+Json是什么？它是一种数据存储格式，可以类比哈希表的key——value结构，key通常是字符串，value可以是数组字符串甚至是嵌套的Json，都是可以的。
+
+这种约定俗成的数据结构为网络通信，网络服务等等提供了极大的便捷，如果想深入了解，可以自行搜索，这里不多赘述。
+
+
+
 ## 什么是API的调用？
 
-大模型是部署在服务器上的，你的每次发送消息都是一个请求。还是以网页版本的AI聊天为例，当你在输入框输入一个问题 ：谁是最帅的人？按下回车一个json格式的文本被创建了，并通过网络协议发送给了大模型
+大模型是部署在服务器上的，你的每次发送消息都是一个请求。还是以网页版本的AI聊天为例，当你在输入框输入一个问题 ：谁是最帅的人？按下回车一个json格式的文本被创建了，并通过网络协议发送给了服务器上的大模型
+```python
+{
+  "model": "gpt-4",
+  "messages": [
+    {"role": "user", "content": "谁是最帅的人"},
+    {"role": "assistant", "content": "大概是speedcore吧"},
+    {"role": "user", "content": "非常赞同"}   
+  ]
+}
+```
+这是一段最最简洁的API调用，我接下来解释一下具体参数。
+
+model即模型的名字 可以是deepseekv4,也可以是glm5.2等等。
+
+messages是一个可变数组，里面存放着你与大模型的对话，每次你给他发送消息，messages数组内容就会增加。
+
+role是角色，即模型用来区分“你”和“他”用的，这里的user，assistant分别代表用户和模型。
+
+content是消息，即双方的聊天内容。
+
+需要注意的是，我们发送每次发送给模型的，不只是你新发的那段文本，还包括之前的所有对话数据，即messages。
+
+**下面我来介绍一下AnthropicAPI参数**
+
+什么是AnthropicAPI规范？
+
+这就像是餐厅装修，有西式风格，中式风格，像openAI，deepseek等等每家大模型厂商有可能有自己的API规范，也可能共用同一套规范，AnthropicAPI规范就是其中之一。
+
+这是一段符合AnthropicAPI规范的多轮对话的状态
+
 ```python
 {
   "request": {
-    "model": "gpt-5.5",
+    "model": "claude-3-opus-20240229",
+    "max_tokens": 1024,
     "messages": [
-      {"role": "user", "content": "谁是最帅的人"}
-    ]
+      {
+        "role": "user",
+        "content": "谁是最帅的人？"
+      },
+      {
+        "role": "assistant",
+        "content": "这是一个主观问题，每个人心中都有不同的答案。"
+      },
+      {
+        "role": "user",
+        "content": "那你觉得呢？"
+      }
+    ],
+    "temperature": 0.7
   },
   "response": {
-    "choices": [
+    "id": "msg_02Def456Uvw012",
+    "type": "message",
+    "role": "assistant",
+    "model": "claude-3-opus-20240229",
+    "stop_reason": "end_turn",
+    "stop_sequence": null,
+    "usage": {
+      "input_tokens": 28,
+      "output_tokens": 55,
+      "total_tokens": 83
+    },
+    "content": [
       {
-        "message": {
-          "role": "assistant",
-          "content": "大概是speedcore吧！"
-        }
+        "type": "text",
+        "text": "作为一个AI，我没有个人偏好。但从大众审美来看，很多人会提到金城武、吴彦祖、贝克汉姆等。不过我觉得，自信、善良、有幽默感的人，比单纯的外表更吸引人。"
       }
     ]
   }
 }
 ```
-这是一段最最简洁的API调用，我接下来解释一下具体参数。
-你发出的消息为请求，即request，模型给出的回复即response。
+**我们可以把这个超级大的Json数据分为两部分来看**
 
+##request
+这部分主要由model,messages数组组成，这部分和之前提到的一致。
 
-<Callout type="info" title="核心思路">
-一个 Orchestrator 负责任务分解与分发，若干 Worker Agent 负责执行，共享一个 Memory Store。
-</Callout>
+maxtoken字面意思就是最大输出的token数，temperature就是模型创造力，这个值越高，模型越能够自我发挥，反之则会越严谨。
 
+需要注意的是虽然这是request模块，即发送请求的模块，messages数组依然包含了这之前的所有对话，这样模型才能记住你说的话。
 
+##response
 
+这部分才是核心。
 
+模型根据你的请求经过思考后给出的回复，它有很多参数。
 
-> **踩坑提示**：Memory 一定要做摘要压缩，否则长对话会迅速吃光 token 预算。
+id是这个response的“身份证”，后期会提到它的作用，这里先不多赘述。
 
-## 数学公式示例
+type是类型，不难发现有两个type，第一个type永远是message，因为它在回复完后一定会附加到messages数组内，第二个type在content内，稍后会讲到。
 
-注意力权重的归一化形式：
+role和model不多赘述。
 
-$$
-\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V
-$$
+stop_sequence：触发停止的词。比如你设置了一个词是敏感词：帅哥，当模型回复内容包含“帅哥”时，模型的回复便停止了。
 
-## 性能数据
+stop_reason是模型停止的原因，这里有几个规定的原因，"end_turn":回答完毕，主动结束，"max_tokend":达到设置长度，内容被截断，结束了，"tool_use":模型请求调用工具，不得不停止，"stop_sequence":碰到停止词了。
 
-| 指标 | 单 Agent | 多 Agent |
-| --- | --- | --- |
-| 任务完成率 | 62% | 89% |
-| 平均 token 消耗 | 8.2k | 5.1k |
-| 端到端延迟 | 6.4s | 9.1s |
+usage是token使用量，这里不多讲。
 
-## 脚注
+content这里虽然只有一个内容，但它是一个数组，可以存放多个内容，这里要引入一个新的概念block。
 
-多智能体协作的早期思想可追溯到黑板系统[^1]。
+#block
 
-[^1]: Nii, H. P. (1986). The Blackboard Model of Problem Solving.
+block就是content数组内的对象，这里给出一个content包含多个block的例子
+
+```python
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "我来帮你查一下北京的天气。"
+    },
+    {
+      "type": "tool_use",
+      "id": "toolu_001",
+      "name": "get_weather",
+      "input": {
+        "city": "北京"
+      }
+    }
+  ]
+}
+```
+block里的type有很多种，text即文本对话，tool_use表示工具调用，tool_result表示工具返回结果等等
+
+关于text不再多说 这里对tool_use展开讲一下。在模型的请求中，我们会提前发给他一个工具表，里面包含着所有它能使用的工具，具体如何实现在下一章会讲解。
+
+当模型认为回复你的问题需要用到某个工具时，就会把type修改为tool_use,那么Input顾名思义就是输入，即工具需要的参数。
+
+当你想获取某些信息可以通过遍历content获得block，比如block.text等等，这对于我们后期的操作有重大意义。
 
 ---
+如果对本系列博客感兴趣欢迎继续阅读下一章内容！
 
-下一步我打算加入**自动反思**机制，让 Orchestrator 在分发失败后能重新规划。如果你也在做类似的事，欢迎在评论区交流。
+
