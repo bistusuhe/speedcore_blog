@@ -76,13 +76,13 @@ export function getAllTags(): { name: string; count: number }[] {
 /** 获取某分类文章 */
 export function getPostsByCategory(category: string): Post[] {
   return getAllPosts().filter(
-    (p) => p.category.toLowerCase() === decodeURIComponent(category).toLowerCase(),
+    (p) => p.category.toLowerCase() === category.toLowerCase(),
   )
 }
 
 /** 获取某标签文章 */
 export function getPostsByTag(tag: string): Post[] {
-  const t = decodeURIComponent(tag).toLowerCase()
+  const t = tag.toLowerCase()
   return getAllPosts().filter((p) => p.tags.some((x) => x.toLowerCase() === t))
 }
 

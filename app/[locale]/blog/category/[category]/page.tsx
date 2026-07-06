@@ -14,7 +14,7 @@ export async function generateStaticParams() {
   return locales.flatMap((locale) =>
     categories.map((c) => ({
       locale,
-      category: encodeURIComponent(c.name),
+      category: c.name,
     })),
   )
 }
@@ -25,7 +25,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; category: string }>
 }): Promise<Metadata> {
   const { category } = await params
-  return { title: decodeURIComponent(category) }
+  return { title: category }
 }
 
 export default async function CategoryPage({
@@ -36,8 +36,7 @@ export default async function CategoryPage({
   const { locale, category } = await params
   setRequestLocale(locale as 'zh' | 'en')
   const t = await getTranslations('blog')
-  const decoded = decodeURIComponent(category)
-  const posts = getPostsByCategory(decoded)
+  const posts = getPostsByCategory(category)
   const categories = getAllCategories()
 
   return (
@@ -56,7 +55,7 @@ export default async function CategoryPage({
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
             {t('category')}
           </p>
-          <h1 className="mt-2 text-display-lg tracking-tight">{decoded}</h1>
+          <h1 className="mt-2 text-display-lg tracking-tight">{category}</h1>
           <p className="mt-2 text-sm text-muted-foreground">
             {t('count', { count: posts.length })}
           </p>
@@ -70,11 +69,11 @@ export default async function CategoryPage({
             </Badge>
           </Link>
           {categories.map((c) => {
-            const active = c.name.toLowerCase() === decoded.toLowerCase()
+            const active = c.name.toLowerCase() === category.toLowerCase()
             return (
               <Link
                 key={c.name}
-                href={`/blog/category/${encodeURIComponent(c.name)}`}
+                href={`/blog/category/${c.name}`}
               >
                 <Badge
                   variant={active ? 'solid' : 'outline'}

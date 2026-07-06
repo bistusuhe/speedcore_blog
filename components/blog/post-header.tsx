@@ -32,7 +32,7 @@ export async function PostHeader({ post, locale }: PostHeaderProps) {
       )}
 
       <div className="space-y-4">
-        <Link href={`/blog/category/${encodeURIComponent(post.category)}`}>
+        <Link href={`/blog/category/${post.category}`}>
           <Badge variant="solid">{post.category}</Badge>
         </Link>
 
@@ -65,7 +65,7 @@ export async function PostHeader({ post, locale }: PostHeaderProps) {
         {post.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 pt-2">
             {post.tags.map((tag) => (
-              <Link key={tag} href={`/blog/tag/${encodeURIComponent(tag)}`}>
+              <Link key={tag} href={`/blog/tag/${tag}`}>
                 <Badge variant="outline">#{tag}</Badge>
               </Link>
             ))}
