@@ -2,13 +2,15 @@
 title: '33.搜索旋转排序数组'
 description: 'leetcode'
 date: '2026-07-05'
-category: 'AI Agent'
+category: '算法'
 tags: ['java', '算法', 'leetcode']
 cover: '/images/posts/leetcode.svg'
 author: 'speedcore'
 pinned: true
 lang: 'zh'
 ---
+## 题目内容
+
 整数数组 nums 按升序排列，数组中的值 互不相同 。
 
 在传递给函数之前，nums 在预先未知的某个下标 k（`0 <= k < nums.length`）上进行了 向左旋转，使数组变为 `[nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]]`（下标 从 0 开始 计数）。例如， `[0,1,2,4,5,6,7]` 下标 3 上向左旋转后可能变为 `[4,5,6,7,0,1,2]` 。
@@ -36,7 +38,7 @@ lang: 'zh'
 
 输出：-1
 
-##思路讲解
+## 思路讲解
 
 首先观察题目，一个不重复的升序数组，存在一个点打破了升序的条件，而且题目的核心是搜索一个符合target的数，再加上logn的复杂度，我们很容易想到二分查找。
 
@@ -58,7 +60,7 @@ lang: 'zh'
 
 题目在这里大致思路就讲解完毕了，下面是代码实现。
 
-##代码实现
+## 代码实现
 
 ```java
 class Solution {

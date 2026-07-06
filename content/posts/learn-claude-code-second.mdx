@@ -13,7 +13,7 @@ lang: 'zh'
 import Callout from '@/components/blog/callout'
 import Mermaid from '@/components/blog/mermaid'
 
-##前置知识 Json
+## 前置知识 Json
 
 Json是什么？它是一种数据存储格式，可以类比哈希表的key——value结构，key通常是字符串，value可以是数组字符串甚至是嵌套的Json，都是可以的。
 
@@ -98,14 +98,14 @@ content是消息，即双方的聊天内容。
 ```
 **我们可以把这个超级大的Json数据分为两部分来看**
 
-##request
+## request
 这部分主要由model,messages数组组成，这部分和之前提到的一致。
 
 maxtoken字面意思就是最大输出的token数，temperature就是模型创造力，这个值越高，模型越能够自我发挥，反之则会越严谨。
 
 需要注意的是虽然这是request模块，即发送请求的模块，messages数组依然包含了这之前的所有对话，这样模型才能记住你说的话。
 
-##response
+## response
 
 这部分才是核心。
 
@@ -125,7 +125,7 @@ usage是token使用量，这里不多讲。
 
 content这里虽然只有一个内容，但它是一个数组，可以存放多个内容，这里要引入一个新的概念block。
 
-#block
+# block
 
 block就是content数组内的对象，这里给出一个content包含多个block的例子
 
