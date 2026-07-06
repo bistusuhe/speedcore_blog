@@ -127,10 +127,10 @@
 
 /* 代码块样式（rehype-pretty-code） */
 [data-rehype-pretty-code-figure] {
-  @apply relative my-6 overflow-hidden rounded-xl border border-border bg-card;
+  @apply relative my-6 max-w-full overflow-hidden rounded-xl border border-border bg-card;
 }
 [data-rehype-pretty-code-figure] pre {
-  @apply max-w-full overflow-x-auto p-4 text-sm leading-relaxed;
+  @apply w-full max-w-full overflow-x-auto p-4 text-sm leading-relaxed;
 }
 [data-rehype-pretty-code-figure] code {
   @apply font-mono;
