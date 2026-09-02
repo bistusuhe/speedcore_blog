@@ -14,6 +14,8 @@ import { Footer } from '@/components/layout/footer'
 import { MusicPlayer } from '@/components/common/music-player'
 import { MouseGlow } from '@/components/motion/mouse-glow'
 import { ClickSpark } from '@/components/motion/click-spark'
+import { PageTransition } from '@/components/motion/page-transition'
+import { SiteIntro } from '@/components/motion/site-intro'
 import siteConfig from '@/config/site'
 import { websiteJsonLd, personJsonLd } from '@/lib/seo'
 
@@ -52,10 +54,13 @@ export default async function LocaleLayout({
               dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd()) }}
             />
 
+            <SiteIntro />
             <MouseGlow />
             <ClickSpark />
             <Header />
-            <main className="relative z-10 min-h-screen pt-16">{children}</main>
+            <main className="relative z-10 min-h-screen pt-16">
+              <PageTransition>{children}</PageTransition>
+            </main>
             <Footer />
             <MusicPlayer />
           </Providers>

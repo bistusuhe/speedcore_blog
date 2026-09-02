@@ -1,32 +1,36 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 
-/** OpenAI 风格 Loading：渐变脉冲 Logo */
+/** 极简细线 Loading：适用于路由切换和局部异步内容 */
 export function Loading({ className }: { className?: string }) {
+  const reduceMotion = useReducedMotion()
+
   return (
     <div
-      className={
-        'flex min-h-[40vh] flex-col items-center justify-center gap-4 ' + (className ?? '')
-      }
+      className={'flex min-h-[40vh] items-center justify-center ' + (className ?? '')}
+      role="status"
+      aria-label="Loading"
     >
-      <motion.div
-        className="flex h-12 w-12 items-center justify-center rounded-2xl bg-foreground text-background"
-        animate={{ opacity: [0.4, 1, 0.4], scale: [0.96, 1.04, 0.96] }}
-        transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        <span className="text-lg font-bold">S</span>
-      </motion.div>
-      <motion.div
-        className="h-1 w-24 overflow-hidden rounded-full bg-muted"
-        aria-hidden
-      >
-        <motion.div
-          className="h-full w-1/2 rounded-full bg-foreground"
-          animate={{ x: ['-100%', '200%'] }}
-          transition={{ duration: 1.1, repeat: Infinity, ease: 'easeInOut' }}
-        />
-      </motion.div>
+      <div className="w-36">
+        <div className="mb-3 flex items-baseline justify-between font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+          <span>Loading</span>
+          <motion.span
+            aria-hidden
+            animate={reduceMotion ? undefined : { opacity: [0.25, 1, 0.25] }}
+            transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            S
+          </motion.span>
+        </div>
+        <div className="h-px overflow-hidden bg-border" aria-hidden>
+          <motion.div
+            className="h-full w-2/5 bg-foreground"
+            animate={reduceMotion ? { x: '150%' } : { x: ['-110%', '260%'] }}
+            transition={{ duration: 1.15, repeat: Infinity, ease: [0.65, 0, 0.35, 1] }}
+          />
+        </div>
+      </div>
     </div>
   )
 }

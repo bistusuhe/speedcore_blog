@@ -31,7 +31,7 @@ export function Hero() {
       <div className="mx-auto w-full max-w-4xl px-6 py-24 text-center md:px-8">
         {/* 主名 */}
         <FadeUp>
-          <h1 className="text-display-2xl text-balance">{t('name')}</h1>
+          <h1 className="text-display-2xl text-balance uppercase">{t('name')}</h1>
         </FadeUp>
 
         {/* 英文名 */}
