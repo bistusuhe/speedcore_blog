@@ -1,5 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
-  <rect width="40" height="40" rx="10" fill="#0a0a0a"/>
-  <text x="50%" y="56%" text-anchor="middle" dominant-baseline="middle"
-        font-family="Geist, system-ui, sans-serif" font-size="22" font-weight="700" fill="#fff">S</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">SpeedCore Personal Logo</title>
+  <desc id="desc">A minimal geometric SC monogram with a speed-cut motif.</desc>
+
+  <defs>
+    <linearGradient id="g" x1="92" y1="96" x2="420" y2="416" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer core -->
+  <path fill="url(#g)" fill-rule="evenodd"
+        d="M256 48
+           C141.1 48 48 141.1 48 256
+           S141.1 464 256 464
+           c78.2 0 146.4-43.2 182-107
+           h-82.7c-24.5 27.1-59.9 44-99.3 44
+           -74.6 0-135-60.4-135-135
+           s60.4-135 135-135
+           c39.4 0 74.8 16.9 99.3 44H438
+           C402.4 91.2 334.2 48 256 48Z"/>
+
+  <!-- S / speed channel -->
+  <path fill="#FACC15"
+        d="M337 166H221
+           c-42 0-75 26-75 62
+           0 31 23 51 61 58
+           l82 15
+           c13 2 19 8 19 17
+           0 12-11 19-29 19H160
+           l-31 47h151
+           c61 0 101-28 101-72
+           0-35-25-57-70-65
+           l-80-14
+           c-10-2-15-6-15-13
+           0-9 9-14 25-14h66l30-40Z"/>
+
+  <!-- Three acceleration cuts -->
+  <path fill="#FFFFFF" d="M83 224h103l-17 25H72z"/>
+  <path fill="#FFFFFF" d="M72 267h102l10 25H78z"/>
+  <path fill="#FFFFFF" d="M91 310h102l24 25H107z"/>
 </svg>

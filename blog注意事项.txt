@@ -1,0 +1,84 @@
+1. 配置环境变量：在 Vercel 项目设置 (https://vercel.com/speedcore/blog/settings/environment-variables) 中添加 .env.example 里的变量，特别是：
+  - NEXT_PUBLIC_SITE_URL → https://blog-nine-ivory-73.vercel.app
+  - NEXT_PUBLIC_GITHUB_USERNAME → bistusuhe
+  - GITHUB_TOKEN → 你的 GitHub Personal Access Token
+  - NEXT_PUBLIC_EMAIL, NEXT_PUBLIC_WECHAT_QR 等
+2. 绑定自定义域名（如有）：在 Vercel 项目 Settings → Domains 添加
+3. 合并到 main 分支：之后推送到 main 分支时 Vercel 会自动重新部署：
+git checkout main && git merge deploy-vercel && git push origin main
+
+
+
+地址: https://blog-nine-ivory-73.vercel.app
+
+
+# 写完文章后，在项目根目录运行（自动生成提交信息）
+pnpm publish:post
+
+# 指定自定义提交信息
+pnpm publish:post "发布：多智能体系统实战笔记"
+
+# 先预览不提交
+pnpm publish:post --dry-run
+
+# 只提交不推送
+pnpm publish:post --no-push
+
+
+
+文字内容来源：
+
+- config/site.ts + .env — 网站标题、作者名、GitHub 链接
+- i18n/messages/zh.json — 所有中文 UI 文案（导航、Hero、关于我、按钮标签等）
+- i18n/messages/en.json — 对应的英文翻译
+- config/experiences.ts — 实习经历、获奖荣誉、兴趣爱好
+- content/posts/*.mdx — 博客文章
+- content/projects/*.mdx — 项目展示
+- .env — 邮箱、微信二维码等敏感/可变信息
+
+一句话：数据改 config/，文案改 i18n/，秘密改 .env，文章改 content/。
+
+
+
+加粗：**文本**
+
+斜体：*文本*
+
+删除线：~~文本~~
+
+行内代码：`code`
+
+代码块：md ```语言名 ``` ，Shiki 双主题语法高亮，自动适配 dark/light
+
+分割线：---
+
+无序列表：- item
+
+有序列表：1. item
+
+引用块：> 文本
+
+表格：标准 GFM 表格语法 | col | col |
+
+链接：[文本](url)，自动 target="_blank" + 下划线样式
+
+图片：![alt](url)，自动圆角边框 + lazy loading
+
+博客图片用法：
+
+- 图片统一放在 public/images/posts/postsimage/ 目录中
+- MDX 文章里引用时不要写 public，路径从 /images 开始
+- PNG 示例：![图片说明](/images/posts/postsimage/example.png)
+- JPG 示例：![图片说明](/images/posts/postsimage/example.jpg)
+- 文章封面在 Frontmatter 中填写：cover: '/images/posts/postsimage/example.jpg'
+- 请将 example.png 或 example.jpg 替换成图片的实际文件名
+- 建议图片文件名使用英文小写、数字和连字符，避免空格
+- 图片放入目录后需要和文章一起提交到 Git
+
+h1-h6 标题：# 到 ######，自动生成锚点 id + hover 可见链接锚点，不同级别有不同字号间距
+
+Callout 提示框：自定义组件，需在文章顶部 import Callout from '@/components/blog/callout'，然后用 <Callout type="info" title="标题">内容</Callout>，type 可选 info / tip / warning / danger，title 可选
+
+Mermaid 图表：import Mermaid from '@/components/blog/mermaid'，然后用 <Mermaid chart={图定义} />
+
+数学公式：$inline$ 行内，$$block$$ 块级，KaTeX 渲染

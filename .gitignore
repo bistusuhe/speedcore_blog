@@ -51,6 +51,7 @@ yarn-error.log*
 # editor
 .idea
 .vscode/*
+/.claude/
 
 # playwright MCP
 .playwright-mcp/

@@ -1,0 +1,89 @@
+---
+title: '206.反转链表'
+description: 'leetcode'
+date: '2026-09-15'
+category: 'algorithm'
+tags: ['java', '算法', 'leetcode','链表','递归']
+cover: '/images/posts/leetcode.svg'
+author: 'speedcore'
+pinned: true
+lang: 'zh'
+---
+## 题目内容
+
+https://leetcode.cn/problems/reverse-linked-list
+
+## 解题思路
+
+这是我几乎第一次深入思考链表的题目，之前碰到有的不会就看题解，写完也是一知半解，下次遇到还是不会。
+
+所以我打算把这道带着简单标签的链表题写一篇博客。
+
+首先拿到题目，非常好理解，反转链表，只需要以当前链表的尾节点转变为头结点，然后依次改变指针。
+
+但真正上手时，并没有那么简单。
+
+开始之前，我们先来介绍一下这种数据结构————链表。
+
+# 链表
+
+链表由节点(ListNode)组成，节点带有两个属性值，一个是数值(val)，表示这个节点的大小，一个是指针(next)，指向下一个节点。
+
+```java
+public class ListNode {
+      int val;
+      ListNode next;
+      ListNode() {}
+      ListNode(int val) { this.val = val; }
+      ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+  }
+```
+我们对链表有了基本的了解，先来看如何将两个节点互换指向(比如1->2,变成2->1)。
+
+就以这个只包含1和2的短链表为例，head节点表示头结点，这里就是1，head.next就是1的下一个节点 2。head.next.next自然是2指向的下一个节点，但很明显2后面没有节点了，即为null，可以理解为2->null。
+
+那如果我修改head.next.next=head呢？仔细想一下，链表变成了1->2->1!那我们为了实现2->1,就需要把1.next指向null。
+
+```java
+head.next.next=head;
+head.next=null;
+```
+
+这将有大作用。
+
+# 深入思考
+
+我们在第一次接触链表时会无从下手，因为它不像数组集合，链表的属性不能够像用索引一样随便取，而是需要由前一个才能找到后一个，依次类推。
+
+再分析一下题意，如果让我们反转链表，让尾节点当头结点，一定要先到达尾部节点吧。
+
+你会想如果我们连续用5个next不就行了？但问题又出现了，我们需要在处理过程中实现节点间指针的转换，如果一口气next到了尾部，我们就没办法对中间节点操作了，所以我们决定用递归。
+
+到达尾部时的判断条件是什么？我们已经了解过了，尾部.next是null，因此当node.next==null时就可以把当前node返回了。
+
+因为我们使用了递归，拿到5节点时，head代表4节点(这里需要仔细想一想，或者先看代码实现)，接下来就按照我们之前得出的交换代码对两个节点处理。
+
+细节可以观察下面的流程图。
+
+![流程图](/images/posts/postsimage/reverselist.png)
+
+## 代码实现
+
+```java
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head==null||head.next==null){
+            return head;
+        }
+        ListNode node=reverseList(head.next);
+        head.next.next=head;
+
+        head.next=null;
+
+        return node;
+    }
+}
+```
+<Callout type="info" title="注意">
+head==null必不可少，因为测试样例可能出现空链表！如果只判断head.next==null判断会出现空指针异常！
+</Callout>
