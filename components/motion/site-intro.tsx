@@ -46,17 +46,17 @@ export function SiteIntro() {
           role="status"
           aria-label="Opening Su He portfolio"
         >
-          {/* 沿左上—右下切线分开的两块灰色幕布 */}
+          {/* 沿左上—右下切线分开的两块 Low Poly 灰色幕布 */}
           <motion.div
             aria-hidden
-            className="absolute inset-0 bg-[#747473] will-change-transform"
+            className="site-intro-lowpoly absolute inset-0 will-change-transform"
             style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%)' }}
             exit={{ x: '100%', y: '-100%' }}
             transition={{ duration: 0.9, ease }}
           />
           <motion.div
             aria-hidden
-            className="absolute inset-0 bg-[#747473] will-change-transform"
+            className="site-intro-lowpoly absolute inset-0 will-change-transform"
             style={{ clipPath: 'polygon(0 0, 100% 100%, 0 100%)' }}
             exit={{ x: '-100%', y: '100%' }}
             transition={{ duration: 0.9, ease }}

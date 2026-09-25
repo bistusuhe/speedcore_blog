@@ -83,6 +83,10 @@
 }
 
 @layer components {
+  .site-intro-lowpoly {
+    background: #747473 url('/images/intro-lowpoly.svg') center / cover no-repeat;
+  }
+
   .container-px {
     @apply px-6 md:px-8 lg:px-12;
   }
