@@ -259,14 +259,12 @@ $$
 
 ```yaml
 ---
-title: AgentForge
-description: 多智能体协作框架
-date: 2026-01-10
-category: AI Agent
-tags: [Python, LLM, Agent]
-cover: /images/projects/agentforge.svg
-github: https://github.com/suhe/agentforge
-demo: https://agentforge.example.com
+title: Observer｜你在吗？
+description: 横向像素叙事探索游戏
+date: 2026-09-21
+category: Game
+tags: [Godot 4, 像素游戏, 叙事探索]
+cover: /images/projects/observer.png
 ---
 ```
 
