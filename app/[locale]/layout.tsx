@@ -13,6 +13,7 @@ import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { MusicPlayer } from '@/components/common/music-player'
 import { MouseGlow } from '@/components/motion/mouse-glow'
+import { BubbleCursor } from '@/components/motion/bubble-cursor'
 import { ClickSpark } from '@/components/motion/click-spark'
 import { PageTransition } from '@/components/motion/page-transition'
 import { SiteIntro } from '@/components/motion/site-intro'
@@ -56,6 +57,7 @@ export default async function LocaleLayout({
 
             <SiteIntro />
             <MouseGlow />
+            <BubbleCursor />
             <ClickSpark />
             <Header />
             <main className="relative z-10 min-h-screen pt-16">
