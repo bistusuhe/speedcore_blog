@@ -17,6 +17,14 @@ export const internships: ExperienceItem[] = [
 /** 获奖 */
 export const awards: AwardItem[] = [
   {
+    date: '2026-10-20',
+    title: {
+      zh: '全国大学生数学建模竞赛',
+      en: 'China Undergraduate Mathematical Contest in Modeling',
+    },
+    level: { zh: '北京赛区二等奖', en: 'Beijing Division 2nd Prize' },
+  },
+  {
     date: '2024-06',
     title: { zh: '蓝桥杯大赛', en: 'Blue Bridge Cup' },
     level: { zh: '省二等奖', en: 'Provincial 2nd Prize' },
