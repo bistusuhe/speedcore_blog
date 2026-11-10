@@ -25,14 +25,22 @@ export const awards: AwardItem[] = [
     level: { zh: '北京赛区二等奖', en: 'Beijing Division 2nd Prize' },
   },
   {
-    date: '2024-06',
+    date: '2026-06',
     title: { zh: '蓝桥杯大赛', en: 'Blue Bridge Cup' },
     level: { zh: '省二等奖', en: 'Provincial 2nd Prize' },
     description: {
-      zh: '算法与数据结构竞赛。',
-      en: 'Algorithm and data structure competition.',
+      zh: '算法与数据结构竞赛',
+      en: 'Algorithm and data structure competition',
     },
-  },
+  },{
+    date: '2026-06',
+    title: { zh: '计算机博弈大赛', en: 'Computer Game Competition' },
+    level: { zh: '国家级一等奖', en: 'National 1st Prize' },
+    description: {
+      zh: '计算机博弈竞赛',
+      en: 'Computer game competition',
+    },
+  }
 ]
 
 /** 兴趣 */
