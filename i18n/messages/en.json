@@ -1,8 +1,8 @@
 {
   "metadata": {
     "title": "SPEEDCORE · Su He — AI Agent Developer & Game Developer Lover",
-    "description": "SPEEDCORE's personal tech blog and project showcase. An undergraduate in Data Science and Big Data Technology, an AI Agent developer, and a game development enthusiast. Notes on AI Agents, Unity, Java, algorithms, and essays.",
-    "keywords": "Su He, AI Agent, Unity, Java, Data Science, blog, personal site"
+    "description": "speedcore's personal tech blog and project showcase. Focused on deep learning and AI Agent research, with experience in NLP and scientific research. Familiar with Python and Java, and able to build basic games with Unity and Godot.",
+    "keywords": "Su He, AI Agent, deep learning, NLP, Python, Java, Unity, Godot, blog, personal site"
   },
   "nav": {
     "home": "Home",
@@ -12,8 +12,8 @@
     "search": "Search"
   },
   "hero": {
-    "name": "SPEEDCORE",
-    "nameEn": "SPEEDCORE",
+    "name": "speedcore",
+    "nameEn": "speedcore",
     "tagline": "AI Agent Developer · Game Developer Lover",
     "subtitle": "CHANGE THE WORLD WITH AI AGENTS",
     "cta": {
@@ -29,7 +29,7 @@
     "subtitle": "About Me",
     "education": "Education",
     "major": "Data Science and Big Data Technology",
-    "bio": "I am SPEEDCORE, an undergraduate majoring in Data Science and Big Data Technology. I focus on **AI Agent** development and enjoy turning ideas into running products. I am also a long-time Unity game development enthusiast."
+    "bio": "I am speedcore, an undergraduate currently focused on cutting-edge knowledge in deep learning and **AI Agent** development. I understand the principles behind MLP, CNN, RNN, LSTM, BERT, and Transformer models, and I am particularly interested in NLP. I also have research experience, am familiar with Python and Java, and can use AI-assisted development to build basic games with Unity and Godot. If we share the same interests, feel free to contact me and exchange ideas."
   },
   "skills": {
     "title": "Skills",
