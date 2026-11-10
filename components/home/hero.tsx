@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button'
 import { FadeUp } from '@/components/motion/motion'
 import { siteConfig } from '@/config/site'
 
+const ctaClassName = 'bg-black text-white hover:bg-white hover:text-black'
+
 /** 首页 Hero：全屏大字 + CTA + 渐变背景 + 向下滚动提示 */
 export function Hero() {
   const t = useTranslations('hero')
@@ -58,19 +60,19 @@ export function Hero() {
         {/* CTA 按钮，stagger 入场 */}
         <FadeUp delay={0.32}>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <Button asChild size="lg">
+            <Button asChild size="lg" variant="outline" className={ctaClassName}>
               <Link href="/#about">{t('cta.about')}</Link>
             </Button>
-            <Button asChild size="lg" variant="outline">
+            <Button asChild size="lg" variant="outline" className={ctaClassName}>
               <Link href="/blog">{t('cta.blog')}</Link>
             </Button>
-            <Button asChild size="lg" variant="outline">
+            <Button asChild size="lg" variant="outline" className={ctaClassName}>
               <a href={siteConfig.author.github} target="_blank" rel="noopener noreferrer">
                 {t('cta.github')}
                 <ArrowUpRight className="h-4 w-4" />
               </a>
             </Button>
-            <Button asChild size="lg" variant="ghost">
+            <Button asChild size="lg" variant="outline" className={ctaClassName}>
               <Link href="/contact">{t('cta.contact')}</Link>
             </Button>
           </div>
